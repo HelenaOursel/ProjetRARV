@@ -8,13 +8,14 @@ namespace PropHunt.Gameplay
     {
         public override void OnNetworkSpawn()
         {
-            StartCoroutine(Place());
+            //StartCoroutine(Place());
         }
         IEnumerator Place()
         {
             yield return new WaitForSeconds(0.5f);
             //Place the player on the position 0,0,0. Only orks because the position is client authoritative
             NetworkManager.Singleton.LocalClient.PlayerObject.transform.position = new Vector3(transform.position.x, 2f, transform.position.z);
+            NetworkManager.Singleton.LocalClient.PlayerObject.GetComponentInChildren<Rigidbody>().useGravity = true;
         }
     }
 }

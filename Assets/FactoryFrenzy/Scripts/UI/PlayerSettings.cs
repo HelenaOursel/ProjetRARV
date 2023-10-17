@@ -7,7 +7,8 @@ using Unity.Collections;
 
 public class PlayerSettings : NetworkBehaviour
 {
-    [SerializeField] private MeshRenderer meshRenderer;
+    [SerializeField] private GameObject body;
+    private MeshRenderer meshRenderer;
     [SerializeField] private TextMeshProUGUI playerName;
     [SerializeField] private Camera cam;
     private NetworkVariable<FixedString128Bytes> networkPlayerName = new NetworkVariable<FixedString128Bytes>(
@@ -17,7 +18,7 @@ public class PlayerSettings : NetworkBehaviour
 
     private void Awake()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer = body.GetComponent<MeshRenderer>();
     }
 
     public override void OnNetworkSpawn()

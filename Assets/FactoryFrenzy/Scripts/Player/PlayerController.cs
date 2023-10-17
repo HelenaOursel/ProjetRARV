@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using Unity.Netcode;
+using UnityEditor.AddressableAssets.Build;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -16,13 +18,27 @@ public class PlayerController : NetworkBehaviour
     private float forwardInput;
     private Rigidbody playerRb;
     private GameObject body;
+    private Camera Camera;
+
+    private List<string> time;
+    private void Awake()
+    {
+        if (Camera == null) Camera = GetComponentInChildren<Camera>(true);
+    }
 
     public override void OnNetworkSpawn()
     {
+        Camera.gameObject.SetActive(false);
+
         if (IsOwner)
         {
-            playerRb = GetComponent<Rigidbody>();
             body = transform.Find("Body").gameObject;
+            playerRb = body.GetComponent<Rigidbody>();
+            Camera.gameObject.SetActive(true);
+
+            Camera.gameObject.transform.position = new Vector3(0f, 2.2f, -3.3f);
+            Camera.gameObject.transform.Rotate(14.5f, 0, 0);
+
         }
     }
     private void Update()
@@ -32,11 +48,14 @@ public class PlayerController : NetworkBehaviour
             horizontalInput = Input.GetAxis("Horizontal");
             forwardInput = Input.GetAxis("Vertical");
 
-            transform.Translate(Vector3.forward * Time.deltaTime * speed * forwardInput);
-            transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalInput);
-
             Vector3 movement = new Vector3(horizontalInput, 0.0f, forwardInput);
-            body.transform.rotation = Quaternion.LookRotation(movement);
+
+            if (movement.magnitude > 0)
+            {
+                body.transform.rotation = Quaternion.LookRotation(movement);
+            }
+
+            transform.Translate(movement * speed * Time.deltaTime, Space.World);
 
             if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
             {
@@ -45,8 +64,7 @@ public class PlayerController : NetworkBehaviour
             }
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
+    public void CollisionDetected(Collision collision)
     {
         if (IsOwner)
         {
