@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class Finish : NetworkBehaviour
 {
-    private NetworkObject player;
+    private GameObject player;
     private Countdown Countdown;
     private float time;
     private void OnTriggerEnter(Collider other)
     {
         if (IsOwner)
         {
-            player = other.GetComponent<NetworkObject>();
+            player = other.gameObject;
 
-            Countdown = GameObject.Find("Countdown").GetComponent<Countdown>();
+            Countdown = GameObject.Find("Timer").GetComponent<Countdown>();
             time = Countdown.timer;
 
-            player.GetComponent<Rigidbody>().isKinematic = true;
+            player.GetComponentInChildren<Rigidbody>().isKinematic = true;
 
             int minutes = Mathf.FloorToInt(time / 60F);
             int seconds = Mathf.FloorToInt(time - minutes * 60);
