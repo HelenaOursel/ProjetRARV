@@ -1,4 +1,6 @@
 using System.Text.RegularExpressions;
+using TMPro;
+using TreeEditor;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine;
@@ -8,25 +10,34 @@ namespace PropHunt.UI
 {
     public class MainMenu : MonoBehaviour
     {
-        [SerializeField]
-        private UIDocument mainMenu;
+        //[SerializeField]
+        //private UIDocument mainMenu;
 
-        private VisualElement m_RootMenu;
+        //private VisualElement m_RootMenu;
 
-        private TextField m_ipAddress;
-        private IntegerField m_port;
+        [SerializeField] public Button m_hostButton;
+        [SerializeField] public Button m_clientButton;
 
-        private Button m_clientButton, m_hostButton;
+        [SerializeField] public TMP_InputField m_ipAddress;
+        [SerializeField] public TMP_InputField m_port;
+
+        //private TextField m_ipAddress;
+        //private IntegerField m_port;
+
+        //private Button m_clientButton, m_hostButton;
 
         void Awake()
         {
-            m_RootMenu = mainMenu.rootVisualElement;
+            //m_RootMenu = mainMenu.rootVisualElement;
 
-            m_clientButton = m_RootMenu.Query<Button>("ClientButton");
-            m_hostButton = m_RootMenu.Query<Button>("HostButton");
+            //m_clientButton = m_RootMenu.Query<Button>("ClientButton");
+            //m_hostButton = m_RootMenu.Query<Button>("HostButton");
 
-            m_ipAddress = m_RootMenu.Query<TextField>("IpField");
-            m_port = m_RootMenu.Query<IntegerField>("PortField");
+            //m_ipAddress = m_RootMenu.Query<TextField>("IpField");
+            //m_port = m_RootMenu.Query<IntegerField>("PortField");
+            m_ipAddress.text = "0.0.0.0";
+            m_port.text = "9990";
+
         }
         /// <summary>
         /// Use sanitized IP and Port to set up the connection.
@@ -54,14 +65,14 @@ namespace PropHunt.UI
 
         private void Start()
         {
-            m_clientButton.clicked += StartClient;
-            m_hostButton.clicked += StartHost;
+            //m_clientButton.clicked += StartClient;
+            //m_hostButton.clicked += StartHost;
         }
 
         /// <summary>
         /// Starts the host using the given connection data.
         /// </summary>
-        void StartHost()
+        public void StartHost()
         {
             SetUtpConnectionData();
             var result = NetworkManager.Singleton.StartHost();
@@ -76,7 +87,7 @@ namespace PropHunt.UI
         /// <summary>
         /// Starts the Client using the given connection data.
         /// </summary>
-        void StartClient()
+        public void StartClient()
         {
             SetUtpConnectionData();
             NetworkManager.Singleton.StartClient();
