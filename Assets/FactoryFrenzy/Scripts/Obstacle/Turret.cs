@@ -62,9 +62,13 @@ public class Turret : NetworkBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Body" && isTrigger.Value == true && IsServer)
+        if (IsOwner)
         {
-            isTrigger.Value = false;
+            if (other.tag == "Body" && isTrigger.Value == true && IsServer)
+            {
+                controller = other.gameObject.transform.root.gameObject.GetComponent<PlayerController>();
+                IsTriggerServerRpc(controller);
+            }
         }
     }
 
