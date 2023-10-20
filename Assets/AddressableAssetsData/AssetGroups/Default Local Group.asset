@@ -52,18 +52,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: cb5ffd9ee1c84f540bc4c0f79c50f967
-    m_Address: PLA TRAMPOLINE
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 314d91501ee14ad40998d5f8d2644b7e
     m_Address: TRA SHOOTER
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f435be22e896f3d46b31461983ef50bc
-    m_Address: TRA BUMPER
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
