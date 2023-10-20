@@ -1,32 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Countdown : MonoBehaviour
+public class Countdown : NetworkBehaviour
 {
-    public float timeRemaining = 10;
+    public NetworkVariable<float> timeRemaining;
     public bool isStarted = false;
-    public float timer;
-    private TextMeshProUGUI count;
-    private GameObject block;
+    public NetworkVariable<float> timer;
+    public TextMeshProUGUI count;
+    public GameObject block;
 
-    private void Start()
+    public override void OnNetworkSpawn()
     {
-        count = GetComponent<TextMeshProUGUI>();
-        block = GameObject.Find("StartDelimitation");
-        timer = 0;
+        timer.Value = 0;
+        timeRemaining.Value = 10;
     }
     void Update()
     {
         if(isStarted == false)
         {
-            if (timeRemaining > 0)
+            if (timeRemaining.Value > 0)
             {
-                timeRemaining -= Time.deltaTime;
-                int minutes = Mathf.FloorToInt(timeRemaining / 60F);
-                int seconds = Mathf.FloorToInt(timeRemaining - minutes * 60);
+                if (IsServer)
+                {
+                    timeRemaining.Value -= Time.deltaTime;
+                }
+
+                int minutes = Mathf.FloorToInt(timeRemaining.Value / 60F);
+                int seconds = Mathf.FloorToInt(timeRemaining.Value - minutes * 60);
 
                 string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
                 count.text = niceTime;
@@ -35,15 +39,24 @@ public class Countdown : MonoBehaviour
             {
                 count.text = "Go !";
                 block.SetActive(false);
+
+                if (IsServer)
+                {
+                    timer.Value += Time.deltaTime;
+                }
+
                 StartCoroutine(Timer());
             }
         }
         else
         {
-            timer += Time.deltaTime;
+            if (IsServer)
+            {
+                timer.Value += Time.deltaTime;
+            }
 
-            int minutes = Mathf.FloorToInt(timer / 60F);
-            int seconds = Mathf.FloorToInt(timer - minutes * 60);
+            int minutes = Mathf.FloorToInt(timer.Value / 60F);
+            int seconds = Mathf.FloorToInt(timer.Value - minutes * 60);
 
             string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
 

@@ -20,7 +20,8 @@ public class PlayerController : NetworkBehaviour
     private GameObject body;
     private Camera Camera;
 
-    private List<string> time;
+    public bool canMove = true;
+
     private void Awake()
     {
         if (Camera == null) Camera = GetComponentInChildren<Camera>(true);
@@ -40,10 +41,28 @@ public class PlayerController : NetworkBehaviour
             Camera.gameObject.transform.Rotate(14.5f, 0, 0);
 
         }
+
+        if (IsServer)
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
     }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name != "Lobby") return;
+        SetPositionClientRpc();
+    }
+
+    [ClientRpc]
+    private void SetPositionClientRpc()
+    {
+        transform.position = new Vector3(0f,1f,0f);
+    }
+
     private void Update()
     {
-        if(IsOwner)
+        if(IsOwner && canMove == true)
         {
             horizontalInput = Input.GetAxis("Horizontal");
             forwardInput = Input.GetAxis("Vertical");

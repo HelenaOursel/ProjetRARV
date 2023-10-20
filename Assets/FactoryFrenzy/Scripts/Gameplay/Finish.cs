@@ -5,6 +5,7 @@ using Unity.Collections;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Finish : NetworkBehaviour
@@ -18,6 +19,7 @@ public class Finish : NetworkBehaviour
     public TextMeshProUGUI textClassement;
     private string classementServer;
     private string OwnerId;
+    public GameObject backToLobby;
 
     private NetworkVariable<bool> FirstPlayerFinished = new(false);
 
@@ -25,17 +27,24 @@ public class Finish : NetworkBehaviour
     {
         FirstPlayerFinished.Value = false;
         UIClassement.SetActive(false);
+
+        if (!IsServer)
+        {
+            backToLobby.SetActive(false);
+        }
+        else
+        {
+            backToLobby.SetActive(true);
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
         if (IsOwner && other.tag == "Body")
         {
             player = other.gameObject;
-            player.GetComponent<Rigidbody>().isKinematic = true;
 
             Countdown = GameObject.Find("Timer").GetComponent<Countdown>();
-            time = Countdown.timer;
+            time = Countdown.timer.Value;
 
             int minutes = Mathf.FloorToInt(time / 60F);
             int seconds = Mathf.FloorToInt(time - minutes * 60);
@@ -47,6 +56,8 @@ public class Finish : NetworkBehaviour
 
             if(!playerIds.Contains(OwnerId))
             {
+                //player.transform.root.transform.GetComponent<PlayerController>().canMove = false;
+
                 SaveTimeServerRpc(niceTime, OwnerId);
             }
         }
@@ -73,7 +84,7 @@ public class Finish : NetworkBehaviour
 
     IEnumerator TimeEnd()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(10);
 
         for (int i = 0; i < playerIds.Count; i++)
         {
@@ -88,10 +99,14 @@ public class Finish : NetworkBehaviour
     {
         UIClassement.SetActive(true);
 
-        //var player = NetworkManager.Singleton.ConnectedClients[NetworkManager.Singleton.LocalClientId].PlayerObject;
-
-        //player.GetComponentInChildren<Rigidbody>().isKinematic = true;
-
         textClassement.text = classementServer; 
+    }
+
+    public void BackToLobby()
+    {
+        if (IsServer)
+        {
+            NetworkManager.Singleton.SceneManager.LoadScene("Lobby", UnityEngine.SceneManagement.LoadSceneMode.Single);
+        }
     }
 }
