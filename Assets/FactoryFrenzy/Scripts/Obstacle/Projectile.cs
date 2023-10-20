@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class Projectile : NetworkBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    private void Start()
     {
-
+        Destroy(gameObject, 3);
     }
-
 }
