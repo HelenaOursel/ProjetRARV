@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEditor.AddressableAssets.Build;
 using UnityEngine;
@@ -20,6 +21,9 @@ public class PlayerController : NetworkBehaviour
     private GameObject body;
     private Camera Camera;
     private AudioListener audioListener;
+
+    private NetworkVariable<FixedString128Bytes> nameScene = new();
+    private Countdown countdown;
 
     public bool canMove = true;
 
@@ -54,14 +58,28 @@ public class PlayerController : NetworkBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name != "Lobby") return;
-        SetPositionClientRpc();
+        if (scene.name == "Lobby" || scene.name == "Game")
+        {
+            SetPositionClientRpc();
+        }
+
+        if(scene.name == "Game")
+        {
+            nameScene.Value = scene.name;
+            CanMoveClientRpc();
+        }
+    }
+
+    [ClientRpc]
+    private void CanMoveClientRpc()
+    {
+        canMove = false;
     }
 
     [ClientRpc]
     private void SetPositionClientRpc()
     {
-        transform.position = new Vector3(0f,1f,0f);
+        transform.position = GameObject.Find("Spawn"+ (OwnerClientId+1)).transform.position;
     }
 
     private void Update()
@@ -91,7 +109,7 @@ public class PlayerController : NetworkBehaviour
     {
         if (IsOwner)
         {
-            if (collision.gameObject.CompareTag("Ground"))
+            if (collision.gameObject.CompareTag("Ground") == true || collision.gameObject.CompareTag("Platform") == true)
             {
                 isOnGround = true;
             }

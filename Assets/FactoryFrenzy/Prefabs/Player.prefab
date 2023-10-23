@@ -5179,7 +5179,6 @@ GameObject:
   - component: {fileID: 8004624638360861024}
   - component: {fileID: 4809078012184160804}
   - component: {fileID: 3113478872438209846}
-  - component: {fileID: 8610577525623300002}
   - component: {fileID: 355039557674119806}
   - component: {fileID: 7003785143627330374}
   - component: {fileID: 8291885274577202897}
@@ -5259,14 +5258,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!81 &8610577525623300002
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2942371926168364613}
-  m_Enabled: 0
 --- !u!54 &355039557674119806
 Rigidbody:
   m_ObjectHideFlags: 0
