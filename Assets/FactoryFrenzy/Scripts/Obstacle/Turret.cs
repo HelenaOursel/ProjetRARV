@@ -25,13 +25,16 @@ public class Turret : NetworkBehaviour
     public GameObject canon;
     public float launchVelocity;
 
+    private AudioSource audioSource;
+
     public override void OnNetworkSpawn()
     {
         if(IsServer)
         {
             isTrigger.Value = false;
-            T_ShootDelay = shootDelay;
         }
+        T_ShootDelay = shootDelay;
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -116,6 +119,7 @@ public class Turret : NetworkBehaviour
                 GameObject ball = Instantiate(projectile, canon.transform.position,
                                                          canon.transform.rotation);
                 ball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, launchVelocity, 0));
+                audioSource.Play();
             }
         }
     }

@@ -9,18 +9,7 @@ public class BumperScript : MonoBehaviour
     // Power of propulsion (sensible)!
     public int powerLevel = 100;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    private AudioSource audioSource;
 
     // Collision Detection
     private void OnCollisionEnter(Collision other)
@@ -31,6 +20,9 @@ public class BumperScript : MonoBehaviour
         {
             // Not Necessary in Network Environnement
             // other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+
+            audioSource = GetComponent<AudioSource>();
+            audioSource.Play();
 
             // Try to get contact of collision
             foreach (ContactPoint contact in other.contacts)

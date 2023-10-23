@@ -13,10 +13,14 @@ public class Countdown : NetworkBehaviour
     public TextMeshProUGUI count;
     public GameObject block;
 
+    private AudioSource audioSource;
+    private bool AudioIsPlayed = false;
+
     public override void OnNetworkSpawn()
     {
         timer.Value = 0;
         timeRemaining.Value = 10;
+        audioSource = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -34,6 +38,12 @@ public class Countdown : NetworkBehaviour
 
                 string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
                 count.text = niceTime;
+
+                if(timeRemaining.Value < 3 && AudioIsPlayed == false) 
+                {
+                    audioSource.Play();
+                    AudioIsPlayed=true;
+                }
             }
             else
             {

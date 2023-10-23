@@ -12,18 +12,8 @@ public class TrampolineScript : MonoBehaviour
 
     // Direction of propulsion
     public Vector3 direction = new Vector3(-1f, 1f, 0f);
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private AudioSource audioSource;
 
 
     // Collider Event To Make Up Object In Contact
@@ -33,8 +23,11 @@ public class TrampolineScript : MonoBehaviour
         string tagObject = collision.gameObject.tag;
 
         if (tagObject == playerTag)
-        {            
-           collision.gameObject.GetComponent<Rigidbody>().AddForce(direction * powerLevel);
+        {
+            audioSource = GetComponent<AudioSource>();
+            audioSource.Play();
+
+            collision.gameObject.GetComponent<Rigidbody>().AddForce(direction * powerLevel);
         }
         
     }
