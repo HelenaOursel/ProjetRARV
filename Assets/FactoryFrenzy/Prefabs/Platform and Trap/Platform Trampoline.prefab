@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTag: ball
-  powerLevel: 2000
+  powerLevel: 500
   direction: {x: -1, y: 1, z: 0}
 --- !u!54 &5176035773959536740
 Rigidbody:
