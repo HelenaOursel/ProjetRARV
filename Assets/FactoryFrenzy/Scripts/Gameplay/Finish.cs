@@ -56,11 +56,19 @@ public class Finish : NetworkBehaviour
 
             if(!playerIds.Contains(OwnerId))
             {
-                //player.transform.root.transform.GetComponent<PlayerController>().canMove = false;
+                StopMoving(player);
+                player.transform.root.transform.GetComponent<ParticleSystem>().Play();
 
                 SaveTimeServerRpc(niceTime, OwnerId);
             }
         }
+    }
+
+    IEnumerator StopMoving(GameObject player)
+    {
+        yield return new WaitForSeconds(1);
+        player.transform.root.transform.GetComponent<PlayerController>().canMove = false;
+
     }
 
     [ServerRpc(RequireOwnership =false)]

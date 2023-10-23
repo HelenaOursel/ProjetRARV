@@ -19,6 +19,7 @@ public class PlayerController : NetworkBehaviour
     private Rigidbody playerRb;
     private GameObject body;
     private Camera Camera;
+    private AudioListener audioListener;
 
     public bool canMove = true;
 
@@ -30,12 +31,15 @@ public class PlayerController : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         Camera.gameObject.SetActive(false);
+        audioListener = GetComponent<AudioListener>();
+        audioListener.enabled = false;
 
         if (IsOwner)
         {
             body = transform.Find("Body").gameObject;
             playerRb = body.GetComponent<Rigidbody>();
             Camera.gameObject.SetActive(true);
+            audioListener.enabled = true;
 
             Camera.gameObject.transform.position = new Vector3(0f, 2.2f, -3.3f);
             Camera.gameObject.transform.Rotate(14.5f, 0, 0);
