@@ -22,6 +22,7 @@ public class Countdown : NetworkBehaviour
         timeRemaining.Value = 10;
         audioSource = GetComponent<AudioSource>();
     }
+
     void Update()
     {
         if(isStarted == false)
@@ -53,6 +54,7 @@ public class Countdown : NetworkBehaviour
                 if (IsServer)
                 {
                     timer.Value += Time.deltaTime;
+                    ChangeMoveClientRpc();
                 }
 
                 StartCoroutine(Timer());
@@ -79,5 +81,12 @@ public class Countdown : NetworkBehaviour
     {
         yield return new WaitForSeconds(3);
         isStarted = true;
+    }
+
+    [ClientRpc]
+    private void ChangeMoveClientRpc()
+    {
+        var player = NetworkManager.LocalClient.PlayerObject;
+        player.GetComponent<PlayerController>().canMove = true;
     }
 }
