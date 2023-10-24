@@ -26,6 +26,10 @@ public class PlayerController : NetworkBehaviour
 
     public bool canMove = true;
 
+
+    private NetworkList<Vector3> checkpoints = new NetworkList<Vector3>();
+    private int checkpointNumberPassed;
+
     private void Awake()
     {
         if (Camera == null) Camera = GetComponentInChildren<Camera>(true);
@@ -114,5 +118,26 @@ public class PlayerController : NetworkBehaviour
                 isOnGround = true;
             }
         }
+    }
+
+
+    public void SetCheckpointPassedNumber(int num)
+    {
+        this.checkpointNumberPassed = num;
+    }
+
+    public void InsertCheckpoint(Vector3 position)
+    {
+        this.checkpoints.Add(position);
+    }
+
+    public Vector3 GetLastCheckpoint()
+    {
+        if (this.checkpoints.Count != 0)
+        {
+            return this.checkpoints[checkpoints.Count - 1];
+        }
+
+        return new Vector3(0f, 1f, 0f);
     }
 }
