@@ -76,7 +76,6 @@ public class PlayerController : NetworkBehaviour
     {
         canMove = false;
     }
-
     [ClientRpc]
     private void SetPositionClientRpc()
     {
