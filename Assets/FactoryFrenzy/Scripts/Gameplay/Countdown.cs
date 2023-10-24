@@ -54,7 +54,9 @@ public class Countdown : NetworkBehaviour
                 if (IsServer)
                 {
                     timer.Value += Time.deltaTime;
-                    ChangeMoveClientRpc();
+
+                    //Block le joueur avant le start
+                    //ChangeMoveClientRpc();
                 }
 
                 StartCoroutine(Timer());
