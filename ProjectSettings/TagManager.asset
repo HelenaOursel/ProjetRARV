@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Body
   - Platform
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

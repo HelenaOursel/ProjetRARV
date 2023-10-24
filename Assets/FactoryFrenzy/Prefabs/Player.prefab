@@ -132,6 +132,7 @@ MonoBehaviour:
   jumpForce: 5
   isOnGround: 1
   canMove: 1
+  checkpointTag: 
 --- !u!114 &8500608398286317878
 MonoBehaviour:
   m_ObjectHideFlags: 0

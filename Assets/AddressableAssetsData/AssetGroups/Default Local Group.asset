@@ -57,11 +57,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fff5ce17bdec2aa45bda1ca50537819c
-    m_Address: TRA FAN
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 15dfc427c2e7d1c49ab4fb9ed17a7a3f, type: 2}
   m_SchemaSet:

@@ -21,10 +21,15 @@ public class PlayerController : NetworkBehaviour
     private Camera Camera;
     private AudioListener audioListener;
 
+
     private NetworkVariable<FixedString128Bytes> nameScene = new();
     private Countdown countdown;
 
     public bool canMove = true;
+
+    // Checkpoint Array
+    private NetworkList<Vector3> Checkpoints = new NetworkList<Vector3>();
+    private int checkpointNumber; // Number of checkpoint
 
     private void Awake()
     {
@@ -116,4 +121,40 @@ public class PlayerController : NetworkBehaviour
             }
         }
     }
+
+    // Getter & Setter --
+    public int GetCheckpointNumber()
+    {
+        return this.checkpointNumber;
+    }
+
+    public void SetCheckpointNumber(int checkpointNumber)
+    {
+        this.checkpointNumber = checkpointNumber;
+    }
+
+    public void SetCheckpoint(Vector3 position)
+    {
+        if (IsServer)
+        {
+            this.Checkpoints.Add(position);
+        }
+    }
+
+    public Vector3 GetLastCheckpoint()
+    {
+        if (this.Checkpoints.Count != 0)
+        {
+            return this.Checkpoints[Checkpoints.Count - 1];
+        }
+
+        return new Vector3(0f, 1f, 0f); ;
+    }
+ 
+}
+
+
+struct CheckPointSaving
+{
+
 }

@@ -5,17 +5,21 @@ using UnityEngine;
 
 public class ZoneController : MonoBehaviour
 {
+   
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Body")
         {
-            Debug.Log("CC");
             var body = other.gameObject.GetComponentInChildren<Rigidbody>();
             var player = other.transform.root.gameObject;
 
             body.isKinematic = true;
 
-            player.transform.position = new Vector3(0f, 1f, 0f);
+            Debug.Log(player.GetComponent<PlayerController>().GetLastCheckpoint());
+
+            Vector3 checkpoint = player.GetComponent<PlayerController>().GetLastCheckpoint();
+
+            player.transform.position = checkpoint;
             body.MovePosition(player.transform.position);
 
             StartCoroutine(Place(body));
