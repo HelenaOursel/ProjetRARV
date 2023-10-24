@@ -65,7 +65,9 @@ public class PlayerController : NetworkBehaviour
         if(scene.name == "Game")
         {
             nameScene.Value = scene.name;
-            CanMoveClientRpc();
+
+            //Block le joueur avant le start
+            //CanMoveClientRpc();
         }
     }
 

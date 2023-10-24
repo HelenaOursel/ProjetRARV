@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.Collections;
 using Unity.Netcode;
@@ -21,12 +22,19 @@ public class Finish : NetworkBehaviour
     private string OwnerId;
     public GameObject backToLobby;
 
+    public GameObject countdownTen;
+    private NetworkVariable<float> TenSeconds = new();
+
+    private int nbPlayer;
+
     private NetworkVariable<bool> FirstPlayerFinished = new(false);
 
     public override void OnNetworkSpawn()
     {
+        TenSeconds.Value = 10f;
         FirstPlayerFinished.Value = false;
         UIClassement.SetActive(false);
+        countdownTen.SetActive(false);
 
         if (!IsServer)
         {
@@ -34,6 +42,7 @@ public class Finish : NetworkBehaviour
         }
         else
         {
+            nbPlayer = NetworkManager.Singleton.ConnectedClients.Count;
             backToLobby.SetActive(true);
         }
     }
@@ -56,7 +65,7 @@ public class Finish : NetworkBehaviour
 
             if(!playerIds.Contains(OwnerId))
             {
-                StopMoving(player);
+                StartCoroutine(StopMoving(player));
                 player.transform.root.transform.GetComponent<ParticleSystem>().Play();
 
                 SaveTimeServerRpc(niceTime, OwnerId);
@@ -66,7 +75,7 @@ public class Finish : NetworkBehaviour
 
     IEnumerator StopMoving(GameObject player)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         player.transform.root.transform.GetComponent<PlayerController>().canMove = false;
 
     }
@@ -84,15 +93,42 @@ public class Finish : NetworkBehaviour
         if (IsServer) {
             if (playerIds.Count == 1 && FirstPlayerFinished.Value == false)
             {
-                StartCoroutine(TimeEnd());
+                StartCoroutine(TimeEnd(10));
                 FirstPlayerFinished.Value = true;
+                TenSecondsClientRpc();
+
             }
+            else if (playerIds.Count == nbPlayer && FirstPlayerFinished.Value == false)
+            {
+                StartCoroutine(TimeEnd(1));
+                FirstPlayerFinished.Value = true;
+
+            }else if(FirstPlayerFinished.Value == true)
+            {
+                TenSeconds.Value -= Time.deltaTime;
+            }
+        }
+
+        if (FirstPlayerFinished.Value == true && TenSeconds.Value > 0)
+        {
+            int minutes = Mathf.FloorToInt(TenSeconds.Value / 60F);
+            int seconds = Mathf.FloorToInt(TenSeconds.Value - minutes * 60);
+
+            string tenseconds = string.Format("{0:0}:{1:00}", minutes, seconds);
+
+            countdownTen.GetComponent<TextMeshProUGUI>().text = tenseconds;
         }
     }
 
-    IEnumerator TimeEnd()
+    [ClientRpc]
+    private void TenSecondsClientRpc()
     {
-        yield return new WaitForSeconds(10);
+        countdownTen.SetActive(true);
+    }
+
+    IEnumerator TimeEnd(int seconds)
+    {
+        yield return new WaitForSeconds(seconds);
 
         for (int i = 0; i < playerIds.Count; i++)
         {

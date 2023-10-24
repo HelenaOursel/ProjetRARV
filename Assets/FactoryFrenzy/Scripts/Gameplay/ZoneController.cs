@@ -13,7 +13,6 @@ public class ZoneController : MonoBehaviour
             var body = other.gameObject.GetComponentInChildren<Rigidbody>();
             var player = other.transform.root.gameObject;
 
-            body.velocity = Vector3.zero;
             body.isKinematic = true;
 
             player.transform.position = new Vector3(0f, 1f, 0f);
