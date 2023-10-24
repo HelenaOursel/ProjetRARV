@@ -42,7 +42,7 @@ public class Finish : NetworkBehaviour
         }
         else
         {
-            nbPlayer = NetworkManager.Singleton.ConnectedClients.Count;
+            nbPlayer = NetworkManager.ConnectedClients.Count;
             backToLobby.SetActive(true);
         }
     }
@@ -85,25 +85,25 @@ public class Finish : NetworkBehaviour
     {
         playerTimes.Add(time);
         playerIds.Add(playerId);
-
     }
 
     private void Update()
     {
-        if (IsServer) {
-            if (playerIds.Count == 1 && FirstPlayerFinished.Value == false)
+        if (IsServer)
+        {
+            if (playerIds.Count == nbPlayer && FirstPlayerFinished.Value == false)
+            {
+                StartCoroutine(TimeEnd(1));
+                FirstPlayerFinished.Value = true;
+            }
+            else if (playerIds.Count == 1 && FirstPlayerFinished.Value == false)
             {
                 StartCoroutine(TimeEnd(10));
                 FirstPlayerFinished.Value = true;
                 TenSecondsClientRpc();
 
             }
-            else if (playerIds.Count == nbPlayer && FirstPlayerFinished.Value == false)
-            {
-                StartCoroutine(TimeEnd(1));
-                FirstPlayerFinished.Value = true;
-
-            }else if(FirstPlayerFinished.Value == true)
+            else if (FirstPlayerFinished.Value == true)
             {
                 TenSeconds.Value -= Time.deltaTime;
             }
