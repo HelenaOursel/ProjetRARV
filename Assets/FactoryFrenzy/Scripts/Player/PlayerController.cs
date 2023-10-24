@@ -60,6 +60,7 @@ public class PlayerController : NetworkBehaviour
         if (scene.name == "Lobby" || scene.name == "Game")
         {
             SetPositionClientRpc();
+            canMove = true;
         }
 
         if(scene.name == "Game")
@@ -102,6 +103,11 @@ public class PlayerController : NetworkBehaviour
             {
                 playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 isOnGround = false;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
             }
         }
     }

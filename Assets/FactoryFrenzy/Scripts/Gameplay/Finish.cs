@@ -66,7 +66,7 @@ public class Finish : NetworkBehaviour
             if(!playerIds.Contains(OwnerId))
             {
                 StartCoroutine(StopMoving(player));
-                player.transform.root.transform.GetComponent<ParticleSystem>().Play();
+                //player.transform.root.transform.GetComponent<ParticleSystem>().Play();
 
                 SaveTimeServerRpc(niceTime, OwnerId);
             }
