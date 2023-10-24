@@ -116,7 +116,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6581443949971158542}
-  - component: {fileID: 1417770502050284683}
+  - component: {fileID: 6976410178338361343}
+  - component: {fileID: 2502116929395376234}
   m_Layer: 0
   m_Name: Platform Checkpoint
   m_TagString: Untagged
@@ -141,8 +142,25 @@ Transform:
   - {fileID: 4888100351205522817}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1417770502050284683
-SphereCollider:
+--- !u!114 &6976410178338361343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4652329573806549489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d75d24af57a9ca4b9f0a4b42a804553, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaterialRefFailed: {fileID: 2100000, guid: 9b3c9896dd740cc4292a488f5d8c497e, type: 2}
+  MaterialRefPassed: {fileID: 2100000, guid: e51fb8f6a1d6a7547a5f4c21299781d8, type: 2}
+  TagPlayer: Body
+  lightPart: {fileID: 3541890436503415731}
+  checkpointNumber: 1
+--- !u!65 &2502116929395376234
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -156,12 +174,12 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.25
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 4.1273336, y: 2.6992714, z: 1}
+  m_Center: {x: -1.8039852, y: 0.8496357, z: 0}
 --- !u!1001 &1012660308529904740
 PrefabInstance:
   m_ObjectHideFlags: 0

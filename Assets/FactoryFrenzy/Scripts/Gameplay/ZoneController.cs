@@ -13,9 +13,11 @@ public class ZoneController : MonoBehaviour
             var body = other.gameObject.GetComponentInChildren<Rigidbody>();
             var player = other.transform.root.gameObject;
 
+            Vector3 checkpointPosition = player.GetComponent<PlayerController>().GetLastCheckpoint();
+
             body.isKinematic = true;
 
-            player.transform.position = new Vector3(0f, 1f, 0f);
+            player.transform.position = checkpointPosition;//new Vector3(0f, 1f, 0f);
             body.MovePosition(player.transform.position);
 
             StartCoroutine(Place(body));
