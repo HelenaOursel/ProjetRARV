@@ -27,9 +27,9 @@ public class PlayerController : NetworkBehaviour
     public bool canMove = true;
 
 
-    private NetworkList<Vector3> checkpoints = new NetworkList<Vector3>();
+    private List<Vector3> checkpoints = new List<Vector3>();
     private int checkpointNumberPassed;
-
+    
     private void Awake()
     {
         if (Camera == null) Camera = GetComponentInChildren<Camera>(true);
@@ -140,4 +140,7 @@ public class PlayerController : NetworkBehaviour
 
         return new Vector3(0f, 1f, 0f);
     }
+
+
+    
 }
