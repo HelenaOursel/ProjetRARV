@@ -48,8 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 335633f47c346ac439460027df887e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTag: Body
-  powerLevel: 100
+  playerTag: Player
+  powerLevel: 200
   direction: {x: -1, y: 1, z: 0}
 --- !u!54 &5176035773959536740
 Rigidbody:
@@ -97,8 +97,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.03056868, y: 0, z: 0.030243844}
-  m_Center: {x: -0.0016105175, y: 0.009922842, z: -0.00025902092}
+  m_Size: {x: 0.03277563, y: 0, z: 0.030243844}
+  m_Center: {x: -0.00050703227, y: 0.009922842, z: -0.00025902034}
 --- !u!82 &8111332557741160926
 AudioSource:
   m_ObjectHideFlags: 0

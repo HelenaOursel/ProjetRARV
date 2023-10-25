@@ -20,14 +20,14 @@ public class BumperScript : MonoBehaviour
         {
             // Not Necessary in Network Environnement
             // other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-
+          
             audioSource = GetComponent<AudioSource>();
             audioSource.Play();
 
             // Try to get contact of collision
             foreach (ContactPoint contact in other.contacts)
             {
-                contact.otherCollider.GetComponentInParent<Rigidbody>().AddForce(-1 * contact.normal * powerLevel, ForceMode.Impulse);
+                other.gameObject.GetComponentInParent<Rigidbody>().AddForce(-1 * contact.normal * powerLevel, ForceMode.Impulse);
             }
         }
     }

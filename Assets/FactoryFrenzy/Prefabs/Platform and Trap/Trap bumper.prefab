@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0414804967ae5704cbfe36e04af6956c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTag: Body
+  playerTag: Player
   powerLevel: 8
 --- !u!82 &7938621319638548892
 AudioSource:
