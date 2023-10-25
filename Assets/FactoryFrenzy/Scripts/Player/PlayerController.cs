@@ -13,7 +13,7 @@ using static UnityEngine.InputSystem.InputAction;
 public class PlayerController : NetworkBehaviour
 {
     public float speed = 5.0f;
-    public float jumpForce = 10;
+    public float jumpForce = 15;
     public bool isOnGround = true;
     private float horizontalInput;
     private float forwardInput;
@@ -32,6 +32,7 @@ public class PlayerController : NetworkBehaviour
     private bool m_bIsJump = false;
     private PlayerInput input;
     private Vector3 m_v3MoveDirection = Vector3.zero;
+    public float Gravity = 20.0f;
 
 
     private NetworkList<Vector3> checkpoints = new NetworkList<Vector3>();
@@ -131,18 +132,23 @@ public class PlayerController : NetworkBehaviour
 
         if (m_bIsJump && canMove == true && isOnGround == true)
         {
-            Debug.Log(m_bIsJump);
             m_v3MoveDirection.y = jumpForce;
         }
         else
         {
-            m_v3MoveDirection.y = movementDirectionY;
+            m_v3MoveDirection.y = 0;
         }
 
-        if(canMove == true)
+        if (!isOnGround)
+        {
+            m_v3MoveDirection.y -= Gravity * Time.deltaTime;
+        }
+
+        if (canMove == true)
         {
             body.transform.rotation = Quaternion.LookRotation(new Vector3(m_v3MoveDirection.x, 0.0f, m_v3MoveDirection.z) * Time.deltaTime);
-            playerRb.MovePosition(transform.position + m_v3MoveDirection * Time.deltaTime);
+            //playerRb.MovePosition(transform.position + m_v3MoveDirection * Time.deltaTime);
+            playerRb.position = transform.position + m_v3MoveDirection * Time.deltaTime;
         }
 
         //if(IsOwner)
