@@ -14,7 +14,7 @@ public class CollisionDetected : NetworkBehaviour
     {
         if(IsOwner)
         {
-            if (other.gameObject.transform.root.tag == "Platform")
+            if (other.gameObject.tag == "Platform")
             {
                 ChangeParentServerRpc(other.gameObject, gameObject.transform.root.gameObject);
             }
@@ -24,7 +24,7 @@ public class CollisionDetected : NetworkBehaviour
     {
         if(IsOwner)
         {
-            if (other.gameObject.transform.root.tag == "Platform")
+            if (other.gameObject.tag == "Platform")
             {
                 NullParentServerRpc(gameObject.transform.parent.gameObject);
             }

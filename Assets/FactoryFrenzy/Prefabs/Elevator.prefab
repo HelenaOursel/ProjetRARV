@@ -1500,6 +1500,7 @@ GameObject:
   - component: {fileID: 5499757616599348151}
   - component: {fileID: 1829532135321776475}
   - component: {fileID: 8322842920047837894}
+  - component: {fileID: 4794465751088828829}
   m_Layer: 0
   m_Name: Droite
   m_TagString: Untagged
@@ -1572,6 +1573,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4794465751088828829
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4810259546887552521}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0000002, y: 0.9999998, z: 1.0000001}
+  m_Center: {x: 0, y: 0, z: -0.000000059604645}
 --- !u!1 &4935180689927920554
 GameObject:
   m_ObjectHideFlags: 0
@@ -3424,7 +3446,6 @@ GameObject:
   m_Component:
   - component: {fileID: 545659344148817562}
   - component: {fileID: 5998357799012552172}
-  - component: {fileID: 2757779448582034344}
   m_Layer: 0
   m_Name: Devant
   m_TagString: Untagged
@@ -3478,27 +3499,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &2757779448582034344
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9214250273500963731}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1422718917051005082
 PrefabInstance:
   m_ObjectHideFlags: 0
