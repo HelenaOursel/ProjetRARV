@@ -27,7 +27,7 @@ public class TrampolineScript : MonoBehaviour
             audioSource = GetComponent<AudioSource>();
             audioSource.Play();
 
-            collision.gameObject.GetComponent<Rigidbody>().AddForce(direction * powerLevel);
+            collision.gameObject.GetComponentInParent<Rigidbody>().AddForce(direction * powerLevel);
         }
         
     }

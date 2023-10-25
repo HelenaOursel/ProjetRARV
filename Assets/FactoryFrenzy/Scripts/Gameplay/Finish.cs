@@ -75,7 +75,6 @@ public class Finish : NetworkBehaviour
     IEnumerator StopMoving(GameObject player)
     {
         yield return new WaitForSeconds(0.5f);
-        Debug.Log("Stop");
         player.gameObject.GetComponent<PlayerController>().canMove = false;
     }
 

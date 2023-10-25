@@ -93,7 +93,7 @@ public class Turret : NetworkBehaviour
     {
         if (playerReference.TryGet(out NetworkObject player))
         {
-            var body = player.transform.Find("Body").gameObject.GetComponent<Rigidbody>();
+            var body = player.transform.Find("Body").gameObject;
 
             Vector3 targetPostition = new Vector3(body.transform.position.x,
                                         transform.position.y + 0.5f,

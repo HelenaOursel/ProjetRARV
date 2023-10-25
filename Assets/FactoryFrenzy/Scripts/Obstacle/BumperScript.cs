@@ -27,7 +27,7 @@ public class BumperScript : MonoBehaviour
             // Try to get contact of collision
             foreach (ContactPoint contact in other.contacts)
             {
-                contact.otherCollider.GetComponent<Rigidbody>().AddForce(-1 * contact.normal * powerLevel, ForceMode.Impulse);
+                contact.otherCollider.GetComponentInParent<Rigidbody>().AddForce(-1 * contact.normal * powerLevel, ForceMode.Impulse);
             }
         }
     }

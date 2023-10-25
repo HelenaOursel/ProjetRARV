@@ -45,7 +45,7 @@ public class windBlowing : MonoBehaviour
         {
             Debug.Log("Get For animation");
             this.WheelAnimation();
-            this.Repulsion(other.gameObject, this.powerWind);
+            this.Repulsion(other.gameObject.transform.parent.gameObject, this.powerWind);
         }
 
     }

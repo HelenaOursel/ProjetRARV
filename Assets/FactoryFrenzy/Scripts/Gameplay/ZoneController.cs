@@ -9,23 +9,22 @@ public class ZoneController : MonoBehaviour
     {
         if(other.tag == "Body")
         {
-            var body = other.gameObject.GetComponentInChildren<Rigidbody>();
             var player = other.transform.root.gameObject;
+            var playerRb = player.GetComponent<Rigidbody>();
 
             Vector3 checkpointPosition = player.GetComponent<PlayerController>().GetLastCheckpoint();
 
-            body.isKinematic = true;
+            playerRb.isKinematic = true;
 
             player.transform.position = checkpointPosition;//new Vector3(0f, 1f, 0f);
-            body.MovePosition(player.transform.position);
 
-            StartCoroutine(Place(body));
+            StartCoroutine(Place(playerRb));
         }
     }
 
-    IEnumerator Place(Rigidbody body)
+    IEnumerator Place(Rigidbody playerRb)
     {
         yield return new WaitForSeconds(1f);
-        body.isKinematic = false;
+        playerRb.isKinematic = false;
     }
 }
