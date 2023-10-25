@@ -48,10 +48,9 @@ public class Finish : NetworkBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (IsOwner && other.tag == "Body")
+        if (other.tag == "Body")
         {
-            player = other.gameObject;
-
+            player = other.gameObject.transform.root.gameObject;
             Countdown = GameObject.Find("Timer").GetComponent<Countdown>();
             time = Countdown.timer.Value;
 
@@ -60,10 +59,10 @@ public class Finish : NetworkBehaviour
 
             string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
 
-            var text = player.transform.root.transform.Find("Body/PlayerHUD/Background/Name").gameObject.GetComponent<TextMeshProUGUI>().text;
+            var text = player.transform.Find("Body/PlayerHUD/Background/Name").gameObject.GetComponent<TextMeshProUGUI>().text;
             OwnerId = text.Substring(text.IndexOf(' ') + 1);
 
-            if(!playerIds.Contains(OwnerId))
+            if (!playerIds.Contains(OwnerId))
             {
                 StartCoroutine(StopMoving(player));
                 //player.transform.root.transform.GetComponent<ParticleSystem>().Play();
@@ -76,8 +75,8 @@ public class Finish : NetworkBehaviour
     IEnumerator StopMoving(GameObject player)
     {
         yield return new WaitForSeconds(0.5f);
-        player.transform.root.transform.GetComponent<PlayerController>().canMove = false;
-
+        Debug.Log("Stop");
+        player.gameObject.GetComponent<PlayerController>().canMove = false;
     }
 
     [ServerRpc(RequireOwnership =false)]

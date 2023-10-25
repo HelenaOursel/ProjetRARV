@@ -57,39 +57,44 @@ public class PlayerController : NetworkBehaviour
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
+
+        if(IsOwner )
+        {
+            Scene scene = SceneManager.GetActiveScene();
+
+            if (scene.name == "Lobby")
+            {
+                transform.position = GameObject.Find("Spawn" + (OwnerClientId + 1)).transform.position;
+                canMove = true;
+            }
+        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "Lobby" || scene.name == "Game")
+        if (scene.name == "Game" || scene.name == "Lobby")
         {
+            CantMoveClientRpc();
             SetPositionClientRpc();
-            canMove = true;
-        }
-
-        if(scene.name == "Game")
-        {
-            nameScene.Value = scene.name;
-
-            //Block le joueur avant le start
-            //CanMoveClientRpc();
         }
     }
 
     [ClientRpc]
-    private void CanMoveClientRpc()
+    private void CantMoveClientRpc()
     {
         canMove = false;
     }
+
     [ClientRpc]
     private void SetPositionClientRpc()
     {
         transform.position = GameObject.Find("Spawn"+ (OwnerClientId+1)).transform.position;
+        canMove = true;
     }
 
     private void Update()
     {
-        if(IsOwner && canMove == true)
+        if(IsOwner)
         {
             horizontalInput = Input.GetAxis("Horizontal");
             forwardInput = Input.GetAxis("Vertical");
@@ -101,12 +106,20 @@ public class PlayerController : NetworkBehaviour
                 body.transform.rotation = Quaternion.LookRotation(movement);
             }
 
-            transform.Translate(movement * speed * Time.deltaTime, Space.World);
+            if(canMove == true)
+            {
+                transform.Translate(movement * speed * Time.deltaTime, Space.World);
+            }
 
             if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
             {
                 playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 isOnGround = false;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
             }
 
             if (Input.GetKeyDown(KeyCode.Escape))

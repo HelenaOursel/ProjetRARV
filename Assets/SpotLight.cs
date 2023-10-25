@@ -13,7 +13,7 @@ public class SpotLight : MonoBehaviour
     void Update()
     {
         timeOn = Random.Range(2, 5);
-        timeOff = Random.Range(0.1f, 2f);
+        timeOff = Random.Range(0.1f, 0.5f);
         if (Time.time > changeTime)
         {
             lightCompo.enabled = !lightCompo.enabled;

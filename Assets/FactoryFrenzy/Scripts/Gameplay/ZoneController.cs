@@ -9,7 +9,6 @@ public class ZoneController : MonoBehaviour
     {
         if(other.tag == "Body")
         {
-            Debug.Log("CC");
             var body = other.gameObject.GetComponentInChildren<Rigidbody>();
             var player = other.transform.root.gameObject;
 
