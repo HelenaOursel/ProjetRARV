@@ -19,7 +19,7 @@ public class PlayerController : NetworkBehaviour
     private float horizontalInput;
     private float forwardInput;
     private Rigidbody playerRb;
-    private GameObject body;
+    public GameObject body;
     private Camera Camera;
     private AudioListener audioListener;
 
@@ -36,7 +36,7 @@ public class PlayerController : NetworkBehaviour
     public float Gravity = 20.0f;
 
 
-    private NetworkList<Vector3> checkpoints = new NetworkList<Vector3>();
+    private List<Vector3> checkpoints = new List<Vector3>();
     private int checkpointNumberPassed;
 
 
@@ -57,7 +57,6 @@ public class PlayerController : NetworkBehaviour
 
         if (IsOwner)
         {
-            body = transform.Find("Body").gameObject;
             playerRb = GetComponent<Rigidbody>();
             Camera.gameObject.SetActive(true);
             audioListener.enabled = true;
@@ -150,8 +149,21 @@ public class PlayerController : NetworkBehaviour
 
         if (canMove == true)
         {
-            body.transform.rotation = Quaternion.LookRotation(new Vector3(m_v3MoveDirection.x, 0.0f, m_v3MoveDirection.z) * Time.deltaTime);
+
+            if (m_v2Move.magnitude > 0)
+            {
+
+                var targetRotation = Quaternion.LookRotation(new Vector3(m_v3MoveDirection.x, 0.0f, m_v3MoveDirection.z));
+
+                // Smoothly rotate towards the target point.
+                body.transform.rotation = Quaternion.Slerp(body.transform.rotation, targetRotation, speed * Time.deltaTime);
+            }
+
+            //body.transform.rotation = Quaternion.LookRotation(new Vector3(m_v3MoveDirection.x, 0.0f, m_v3MoveDirection.z) * Time.deltaTime);
+
+
             //playerRb.MovePosition(transform.position + m_v3MoveDirection * Time.deltaTime);
+            
             playerRb.position = transform.position + m_v3MoveDirection * Time.deltaTime;
         }
 
@@ -270,6 +282,5 @@ public class PlayerController : NetworkBehaviour
         Application.Quit();
     }
 
- 
 
 }

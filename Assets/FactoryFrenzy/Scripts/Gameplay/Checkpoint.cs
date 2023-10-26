@@ -14,7 +14,7 @@ public class Checkpoint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AnimationLight(false);
+        AnimationLight(false, false);
     }
 
     // Update is called once per frame
@@ -23,14 +23,17 @@ public class Checkpoint : MonoBehaviour
         
     }
 
-    void AnimationLight(bool status)
+    void AnimationLight(bool status, bool isOwner)
     {
         if (!status)
         {
             lightPart.GetComponent<MeshRenderer>().material = MaterialRefFailed;
         } else
         {
-            lightPart.GetComponent<MeshRenderer>().material = MaterialRefPassed;
+            if (isOwner)
+            {
+                lightPart.GetComponent<MeshRenderer>().material = MaterialRefPassed;
+            }
         }
     }
 
@@ -45,7 +48,8 @@ public class Checkpoint : MonoBehaviour
 
         if (tag == TagPlayer)
         {
-            AnimationLight(true);
+            // Debug.Log(other.GetComponentInParent<PlayerController>().IsOwner);
+            AnimationLight(true, other.GetComponentInParent<PlayerController>().IsOwner);
             other.GetComponentInParent<PlayerController>().SetCheckpointPassedNumber(checkpointNumber);
             other.GetComponentInParent<PlayerController>().InsertCheckpoint(transform.position + new Vector3(-1, 0f, 0));
         }

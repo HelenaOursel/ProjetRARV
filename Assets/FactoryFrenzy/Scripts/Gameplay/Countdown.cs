@@ -13,6 +13,11 @@ public class Countdown : NetworkBehaviour
     public TextMeshProUGUI count;
     public GameObject block;
 
+    public GameObject porteD;
+    public GameObject porteG;
+
+    private bool isAnimated = false;
+
     private AudioSource audioSource;
     private bool AudioIsPlayed = false;
 
@@ -50,6 +55,14 @@ public class Countdown : NetworkBehaviour
             {
                 count.text = "Go !";
                 block.SetActive(false);
+
+                if(isAnimated == false)
+                {
+                    porteD.transform.position = new Vector3(15f, porteD.transform.position.y, porteD.transform.position.z);
+                    porteG.transform.position = new Vector3(-18f, porteD.transform.position.y, porteD.transform.position.z);
+
+                    isAnimated = true;
+                }
 
                 if (IsServer)
                 {
