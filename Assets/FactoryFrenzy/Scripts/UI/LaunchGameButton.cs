@@ -7,6 +7,9 @@ using UnityEngine;
 public class LaunchGameButton : NetworkBehaviour
 {
     public string GameSceneName = "Game";
+    public string GameSceneWithJSON = "GameLoadScene";
+    public LevelSelect LevelSelectScript;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +24,13 @@ public class LaunchGameButton : NetworkBehaviour
 
     public void LaunchGame()
     {
-        NetworkManager.Singleton.SceneManager.LoadScene(GameSceneName, UnityEngine.SceneManagement.LoadSceneMode.Single);
+        if (LevelSelectScript.GetLevelNumber() == 1)
+        {
+            NetworkManager.Singleton.SceneManager.LoadScene(GameSceneWithJSON, UnityEngine.SceneManagement.LoadSceneMode.Single);
+
+        } else
+        {
+            NetworkManager.Singleton.SceneManager.LoadScene(GameSceneName, UnityEngine.SceneManagement.LoadSceneMode.Single);
+        }
     }
 }

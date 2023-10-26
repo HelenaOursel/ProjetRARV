@@ -52,18 +52,28 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 314d91501ee14ad40998d5f8d2644b7e
-    m_Address: TRA SHOOTER
+  - m_GUID: 042aab118f3fe734991e40b8afebdfe0
+    m_Address: TRA BUMPER
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dde249f823da6784eba56bfae688cb72
-    m_Address: Assets/FactoryFrenzy/Prefabs/Platform and Trap/Start.prefab
+    m_Address: PLA START
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 187f51dfd3cfd994fad6bb40fe19e24f
-    m_Address: Assets/FactoryFrenzy/Prefabs/Platform and Trap/Finish.prefab
+    m_Address: PLA END
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 80ee094f6e9bb9c4b82c31c78e90a6a4
+    m_Address: TRA SHOOTER
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c6190fb59479adb45bda291524f8d027
+    m_Address: TRA FAN
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

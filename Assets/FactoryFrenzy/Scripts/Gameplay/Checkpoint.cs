@@ -47,7 +47,7 @@ public class Checkpoint : MonoBehaviour
         {
             AnimationLight(true);
             other.GetComponentInParent<PlayerController>().SetCheckpointPassedNumber(checkpointNumber);
-            other.GetComponentInParent<PlayerController>().InsertCheckpoint(transform.position + new Vector3(-1, 1f, 0));
+            other.GetComponentInParent<PlayerController>().InsertCheckpoint(transform.position + new Vector3(-1, 0f, 0));
         }
     }
 }

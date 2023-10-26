@@ -422,6 +422,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameSceneName: Game
+  GameSceneWithJSON: GameLoadScene
+  LevelSelectScript: {fileID: 7944156680281461638}
 --- !u!114 &1146705541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -779,6 +781,18 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 733946200}
   m_SourcePrefab: {fileID: 100100000, guid: c51264fcfb430b940a863741925ad7ad, type: 3}
+--- !u!114 &7944156680281461638 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4378606875069611787, guid: c51264fcfb430b940a863741925ad7ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 7944156680281461637}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd82dc746d97e5a47955b1a70584c74e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
