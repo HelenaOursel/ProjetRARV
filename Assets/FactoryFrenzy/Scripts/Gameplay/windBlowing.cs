@@ -9,11 +9,12 @@ public class windBlowing : MonoBehaviour
     public float speedWheel = 2;
     private float speedFactorWheel = 10;
     public string tagObject;
+    public Vector3 direction;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -32,7 +33,7 @@ public class windBlowing : MonoBehaviour
 
     private void Repulsion(GameObject gameObject, int power)
     {
-        gameObject.GetComponent<Rigidbody>().AddForce(Vector3.back * power);
+        gameObject.GetComponent<Rigidbody>().AddForce(this.direction * power);
     }
 
 
@@ -43,7 +44,6 @@ public class windBlowing : MonoBehaviour
 
         if (tagObject == tag)
         {
-            Debug.Log("Get For animation");
             this.WheelAnimation();
             this.Repulsion(other.gameObject.transform.parent.gameObject, this.powerWind);
         }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
@@ -37,7 +38,10 @@ public class PlayerController : NetworkBehaviour
 
     private List<Vector3> checkpoints = new List<Vector3>();
     private int checkpointNumberPassed;
-    
+
+
+    public Canvas EscapeUI;
+
     private void Awake()
     {
         if (Camera == null) Camera = GetComponentInChildren<Camera>(true);
@@ -163,6 +167,9 @@ public class PlayerController : NetworkBehaviour
             playerRb.position = transform.position + m_v3MoveDirection * Time.deltaTime;
         }
 
+
+        // ShowEscapeUI();
+
         //if(IsOwner)
         //{
         //    horizontalInput = Input.GetAxis("Horizontal");
@@ -229,6 +236,51 @@ public class PlayerController : NetworkBehaviour
         return new Vector3(0f, 1f, 0f);
     }
 
+    // Escape game !!
+    public void ShowEscapeUI()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("Escape UI !");
+            this.EscapeUI.gameObject.SetActive(true);
+        }
+    }
 
-    
+    public void CloseEscapeUI()
+    {
+        this.EscapeUI.gameObject.SetActive(false);
+    }
+
+
+    public void Escape()
+    {
+        var id = NetworkManager.Singleton.LocalClient.ClientId;
+        
+        if (NetworkManager.Singleton.LocalClient.ClientId == OwnerClientId)
+        {
+            NetworkManager.Singleton.Shutdown();
+
+            this.EscapeGameServerRpc();
+        }
+        Application.Quit();
+    }
+
+
+    [ServerRpc]
+    public void EscapeGameServerRpc()
+    {
+        if (IsServer)
+        {
+            // var id = NetworkManager.Singleton.LocalClient.ClientId;
+            //Debug.Log(NetworkManager.ConnectedClients.Values.GetEnumerator());
+            NetworkManager.DisconnectClient(OwnerClientId);
+        } else
+        {
+            NetworkManager.Singleton.Shutdown();
+        }
+
+        Application.Quit();
+    }
+
+
 }

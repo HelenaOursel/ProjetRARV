@@ -51,7 +51,7 @@ public class Checkpoint : MonoBehaviour
             // Debug.Log(other.GetComponentInParent<PlayerController>().IsOwner);
             AnimationLight(true, other.GetComponentInParent<PlayerController>().IsOwner);
             other.GetComponentInParent<PlayerController>().SetCheckpointPassedNumber(checkpointNumber);
-            other.GetComponentInParent<PlayerController>().InsertCheckpoint(transform.position + new Vector3(-1, 1f, 0));
+            other.GetComponentInParent<PlayerController>().InsertCheckpoint(transform.position + new Vector3(-1, 0f, 0));
         }
     }
 }
