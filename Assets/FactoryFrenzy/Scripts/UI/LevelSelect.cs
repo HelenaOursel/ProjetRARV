@@ -17,7 +17,7 @@ public class LevelSelect : NetworkBehaviour
 
     public void OnUpClick()
     {
-        if (IsServer)
+        if(IsServer)
         {
             nbLevel++;
             OnClientRpc(nbLevel.ToString());
@@ -29,7 +29,7 @@ public class LevelSelect : NetworkBehaviour
         if (IsServer && nbLevel != 0)
         {
             nbLevel--;
-            if (nbLevel == 0)
+            if(nbLevel == 0)
             {
                 OnClientRpc((nbLevel.ToString() + " - Defaut"));
             }
@@ -44,11 +44,5 @@ public class LevelSelect : NetworkBehaviour
     public void OnClientRpc(string text)
     {
         LevelText.text = text;
-    }
-
-
-    public int GetLevelNumber()
-    {
-        return nbLevel;
     }
 }
