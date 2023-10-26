@@ -130,7 +130,7 @@ public class Finish : NetworkBehaviour
 
         for (int i = 0; i < playerIds.Count; i++)
         {
-            classementServer = classementServer + "Player " + playerIds[i] + " : " + playerTimes[i] + "<br>";
+            classementServer = classementServer + (i+1) + "-  Player " + playerIds[i] + " : " + playerTimes[i] + "<br>";
         }
 
         DisplayEndClientRpc(classementServer);
