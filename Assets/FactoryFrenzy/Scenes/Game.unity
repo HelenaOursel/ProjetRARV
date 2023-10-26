@@ -16370,6 +16370,36 @@ PrefabInstance:
       propertyPath: textClassement
       value: 
       objectReference: {fileID: 1324420194}
+    - target: {fileID: 2442758590657965654, guid: 187f51dfd3cfd994fad6bb40fe19e24f,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.6637101
+      objectReference: {fileID: 0}
+    - target: {fileID: 2442758590657965654, guid: 187f51dfd3cfd994fad6bb40fe19e24f,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.53932375
+      objectReference: {fileID: 0}
+    - target: {fileID: 2442758590657965654, guid: 187f51dfd3cfd994fad6bb40fe19e24f,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 11.663605
+      objectReference: {fileID: 0}
+    - target: {fileID: 2442758590657965654, guid: 187f51dfd3cfd994fad6bb40fe19e24f,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0.01290145
+      objectReference: {fileID: 0}
+    - target: {fileID: 2442758590657965654, guid: 187f51dfd3cfd994fad6bb40fe19e24f,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.23033813
+      objectReference: {fileID: 0}
+    - target: {fileID: 2442758590657965654, guid: 187f51dfd3cfd994fad6bb40fe19e24f,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 6.0348206
+      objectReference: {fileID: 0}
     - target: {fileID: 3408254318022481603, guid: 187f51dfd3cfd994fad6bb40fe19e24f,
         type: 3}
       propertyPath: m_LocalPosition.x
