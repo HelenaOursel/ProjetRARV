@@ -477,8 +477,8 @@ MonoBehaviour:
     m_InternalValue: 0
   count: {fileID: 74964979}
   block: {fileID: 1470702121}
-  porteD: {fileID: 0}
-  porteG: {fileID: 0}
+  porteD: {fileID: 1684151589}
+  porteG: {fileID: 92776746}
 --- !u!114 &74964982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,6 +595,12 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &92776746 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2114723532005012928, guid: c51264fcfb430b940a863741925ad7ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 1883119838}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &104440660
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12853,6 +12859,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 7b83d55e12b21464a86477ea5e890700,
     type: 3}
   m_PrefabInstance: {fileID: 1681489049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1684151589 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4810259546887552521, guid: c51264fcfb430b940a863741925ad7ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 1883119838}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1728587244
 PrefabInstance:

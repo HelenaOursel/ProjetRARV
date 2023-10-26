@@ -146,7 +146,13 @@ public class PlayerController : NetworkBehaviour
 
         if (canMove == true)
         {
-            body.transform.rotation = Quaternion.LookRotation(new Vector3(m_v3MoveDirection.x, 0.0f, m_v3MoveDirection.z) * Time.deltaTime);
+            //body.transform.rotation = Quaternion.LookRotation(new Vector3(m_v3MoveDirection.x, 0.0f, m_v3MoveDirection.z) * Time.deltaTime);
+
+            var targetRotation = Quaternion.LookRotation(new Vector3(m_v3MoveDirection.x, 0.0f, m_v3MoveDirection.z));
+
+            // Smoothly rotate towards the target point.
+            body.transform.rotation = Quaternion.Slerp(body.transform.rotation, targetRotation, speed * Time.deltaTime);
+
             //playerRb.MovePosition(transform.position + m_v3MoveDirection * Time.deltaTime);
             playerRb.position = transform.position + m_v3MoveDirection * Time.deltaTime;
         }
