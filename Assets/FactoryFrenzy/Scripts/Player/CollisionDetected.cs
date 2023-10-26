@@ -7,29 +7,29 @@ public class CollisionDetected : NetworkBehaviour
 {
     void OnCollisionEnter(Collision collision)
     {
-        transform.parent.GetComponent<PlayerController>().CollisionDetected(collision);
+        gameObject.GetComponent<PlayerController>().CollisionDetected(collision);
     }
 
-    private void OnCollisionStay(Collision other)
-    {
-        if(IsOwner)
-        {
-            if (other.gameObject.tag == "Platform")
-            {
-                ChangeParentServerRpc(other.gameObject, gameObject.transform.root.gameObject);
-            }
-        }
-    }
-    private void OnCollisionExit(Collision other)
-    {
-        if(IsOwner)
-        {
-            if (other.gameObject.tag == "Platform")
-            {
-                NullParentServerRpc(gameObject.transform.parent.gameObject);
-            }
-        }
-    }
+    //private void OnCollisionStay(Collision other)
+    //{
+    //    if(IsOwner)
+    //    {
+    //        if (other.gameObject.tag == "Platform")
+    //        {
+    //            ChangeParentServerRpc(other.gameObject, gameObject);
+    //        }
+    //    }
+    //}
+    //private void OnCollisionExit(Collision other)
+    //{
+    //    if(IsOwner)
+    //    {
+    //        if (other.gameObject.tag == "Platform")
+    //        {
+    //            NullParentServerRpc(gameObject);
+    //        }
+    //    }
+    //}
 
     [ServerRpc]
     private void ChangeParentServerRpc(NetworkObjectReference other, NetworkObjectReference player)
